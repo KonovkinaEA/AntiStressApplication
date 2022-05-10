@@ -18,5 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BreathActivity.class);
         startActivity(intent);
     }
+    public void openSoundsActivity(View v) {
+        Intent intent = new Intent(this, SoundsActivity.class);
+        startActivity(intent);
+    }
 
 }

@@ -4,71 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main"
-    tools:context=".MainActivity" >
-
-    <Button
-        android:id="@+id/sounds"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/sounds"
-        android:onClick="openSoundsActivity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.949" />
-
-    <Button
-        android:id="@+id/breath"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/breath"
-        android:onClick="openBreathActivity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.949" />
-
-    <Button
-        android:id="@+id/exercises"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/exercises"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.949" />
+    android:background="@drawable/sounds_background"
+    tools:context=".SoundsActivity">
 
     <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_marginTop="10sp"
+        android:id="@+id/backFromSounds"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/back_from_sounds"
+        android:onClick="openMainActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161"
-        app:srcCompat="@drawable/avatar" />
+        app:layout_constraintVertical_bias="0.94" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="214dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/purple_500"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="username"
+    <ImageView
+        android:id="@+id/play"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/button_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512" />
+        app:layout_constraintVertical_bias="0.78"/>
+
+    <ImageView
+        android:id="@+id/fire"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/sound_fire"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <ImageView
+        android:id="@+id/water"
+        android:layout_width="200dp"
+        android:layout_height="95dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        app:srcCompat="@drawable/sound_water" />
+
+    <ImageView
+        android:id="@+id/rain"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:srcCompat="@drawable/sound_rain" />
 </androidx.constraintlayout.widget.ConstraintLayout>
