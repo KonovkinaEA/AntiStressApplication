@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pattern_el"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:gravity="center"
+    android:background="@drawable/texts_element"
+    android:fontFamily="@font/palatinolinotype_bolditalic"
+    android:textSize="25sp">
+</TextView>

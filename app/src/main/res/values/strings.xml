@@ -2,4 +2,15 @@
     <string name="app_name">AntiStress</string>
     <string name="your_health_is_the_most_important">Your health is the most important</string>
     <string name="_0">0</string>
+    <string name="text_0">
+        Просто какой-то текст, надо проверить работу.
+        \nНовый абзац.
+    </string>
+    <string name="text_1">
+        0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n1\n2\n3
+    </string>
+    <string name="text_2">text 3</string>
+    <string name="text_3">text 4</string>
+    <string name="text_4">text 5</string>
+    <string name="text_5">text 6</string>
 </resources>
