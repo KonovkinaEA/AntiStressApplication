@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="texts_elements">
-        <item>text 1</item>
-        <item>text 2</item>
-        <item>text 3</item>
-        <item>text 4</item>
-        <item>text 5</item>
-        <item>text 6</item>
+        <item>Дыхание животом</item>
+        <item>Волчье дыхание</item>
+        <item>Позитивное мышление</item>
+        <item>Возвращение в реальность</item>
+        <item>Медитация</item>
+        <item>Прогрессивная релаксация</item>
     </string-array>
 </resources>
