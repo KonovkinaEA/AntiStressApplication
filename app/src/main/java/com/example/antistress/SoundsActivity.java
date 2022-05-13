@@ -2,7 +2,6 @@ package com.example.antistress;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +10,10 @@ import android.widget.ImageView;
 public class SoundsActivity extends AppCompatActivity {
 
     enum Sound { NONE, RAIN, WATER, FIRE }
-    boolean playStatus = false;
+    boolean soundPlay = false;
     Sound chosenSound = Sound.NONE;
     MediaPlayer curSound;
+    boolean soundWasModified = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +24,15 @@ public class SoundsActivity extends AppCompatActivity {
         curSound.setOnCompletionListener(mp -> play());
     }
 
-    public void openMainActivity(View v) {
-        curSound.stop();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
     public void playRain(View v) {
         ImageView image = findViewById(R.id.rain);
+        if (!soundPlay)
+            soundWasModified = true;
         switch (chosenSound) {
             case RAIN: {
                 chosenSound = Sound.NONE;
                 image.setBackgroundResource(R.drawable.sound_rain);
-                if(playStatus)
+                if(soundPlay)
                     stop();
             }
             break;
@@ -45,7 +41,7 @@ public class SoundsActivity extends AppCompatActivity {
                 image.setBackgroundResource(R.drawable.chose_rain);
                 ImageView i = findViewById(R.id.fire);
                 i.setBackgroundResource(R.drawable.sound_fire);
-                if(playStatus)
+                if(soundPlay)
                     play();
             }
             break;
@@ -55,7 +51,7 @@ public class SoundsActivity extends AppCompatActivity {
                 image.setBackgroundResource(R.drawable.chose_rain);
                 ImageView i = findViewById(R.id.water);
                 i.setBackgroundResource(R.drawable.sound_water);
-                if(playStatus)
+                if(soundPlay)
                     play();
             }
             break;
@@ -67,11 +63,13 @@ public class SoundsActivity extends AppCompatActivity {
     }
     public void playWater(View v) {
         ImageView image = findViewById(R.id.water);
+        if (!soundPlay)
+            soundWasModified = true;
         switch (chosenSound) {
             case WATER: {
                 chosenSound = Sound.NONE;
                 image.setBackgroundResource(R.drawable.sound_water);
-                if(playStatus)
+                if(soundPlay)
                     stop();
             }
             break;
@@ -80,7 +78,7 @@ public class SoundsActivity extends AppCompatActivity {
                 image.setBackgroundResource(R.drawable.chose_water);
                 ImageView i = findViewById(R.id.fire);
                 i.setBackgroundResource(R.drawable.sound_fire);
-                if(playStatus)
+                if(soundPlay)
                     play();
             }
             break;
@@ -90,7 +88,7 @@ public class SoundsActivity extends AppCompatActivity {
                 image.setBackgroundResource(R.drawable.chose_water);
                 ImageView i = findViewById(R.id.rain);
                 i.setBackgroundResource(R.drawable.sound_rain);
-                if(playStatus)
+                if(soundPlay)
                     play();
             }
             break;
@@ -102,11 +100,13 @@ public class SoundsActivity extends AppCompatActivity {
     }
     public void playFire(View v) {
         ImageView image = findViewById(R.id.fire);
+        if (!soundPlay)
+            soundWasModified = true;
         switch (chosenSound) {
             case FIRE: {
                 chosenSound = Sound.NONE;
                 image.setBackgroundResource(R.drawable.sound_fire);
-                if(playStatus)
+                if(soundPlay)
                     stop();
             }
                 break;
@@ -115,7 +115,7 @@ public class SoundsActivity extends AppCompatActivity {
                 image.setBackgroundResource(R.drawable.chose_fire);
                 ImageView i = findViewById(R.id.water);
                 i.setBackgroundResource(R.drawable.sound_water);
-                if(playStatus)
+                if(soundPlay)
                     play();
             }
                 break;
@@ -125,7 +125,7 @@ public class SoundsActivity extends AppCompatActivity {
                 image.setBackgroundResource(R.drawable.chose_fire);
                 ImageView i = findViewById(R.id.rain);
                 i.setBackgroundResource(R.drawable.sound_rain);
-                if(playStatus)
+                if(soundPlay)
                     play();
             }
                 break;
@@ -137,8 +137,8 @@ public class SoundsActivity extends AppCompatActivity {
     }
 
     public void playback(View v) {
-        if (playStatus){
-            stop();
+        if (soundPlay){
+            pause();
         }
         else if(chosenSound != Sound.NONE) {
             play();
@@ -146,28 +146,43 @@ public class SoundsActivity extends AppCompatActivity {
     }
 
     private void play() {
-        curSound.stop();
-        switch (chosenSound) {
-            case FIRE:
-                curSound = MediaPlayer.create(this, R.raw.fire);
-                break;
-            case WATER:
-                curSound = MediaPlayer.create(this, R.raw.water);
-                break;
-            default:
-                curSound = MediaPlayer.create(this, R.raw.rain);
-                break;
+        if (soundWasModified || soundPlay) {
+            curSound.stop();
+            switch (chosenSound) {
+                case FIRE:
+                    curSound = MediaPlayer.create(this, R.raw.fire);
+                    break;
+                case WATER:
+                    curSound = MediaPlayer.create(this, R.raw.water);
+                    break;
+                default:
+                    curSound = MediaPlayer.create(this, R.raw.rain);
+                    break;
+            }
         }
-        playStatus = true;
+        soundWasModified = false;
+        soundPlay = true;
         ImageView image = findViewById(R.id.play);
         image.setBackgroundResource(R.drawable.button_stop);
         curSound.start();
     }
 
-    private void stop() {
-        curSound.stop();
-        playStatus = false;
+    private void pause() {
+        curSound.pause();
+        soundPlay = false;
         ImageView image = findViewById(R.id.play);
         image.setBackgroundResource(R.drawable.button_play);
+    }
+
+    private void stop() {
+        curSound.stop();
+        soundPlay = false;
+        ImageView image = findViewById(R.id.play);
+        image.setBackgroundResource(R.drawable.button_play);
+    }
+
+    public void closeSoundsActivity(View v) {
+        curSound.stop();
+        finish();
     }
 }

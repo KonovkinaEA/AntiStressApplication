@@ -45,8 +45,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.949" />
 
-    <EditText
-        android:id="@+id/username"
+    <TextView
+        android:id="@+id/previewText"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple_500"
