@@ -4,23 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import android.widget.TextView;
 
 public class BreathActivity extends AppCompatActivity {
 
     ImageView imageCircle;
+    TextView textB;
     Animation anim;
     EditText repeatCount;
-    int setValue;
-    int currentValue = -1;
+    int setValue; // значение, набранное в строке задания повторов ()
+    int currentValue = -1; // текущее значение циклов
+    final int duration = 4400; // длительность периода анимации
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,8 @@ public class BreathActivity extends AppCompatActivity {
         setContentView(R.layout.activity_breath);
 
         repeatCount = findViewById(R.id.repeatCount);
+
+        textB = findViewById(R.id.textBreathCircle);
 
         imageCircle = findViewById(R.id.imageCircle);
         anim = AnimationUtils.loadAnimation(this, R.anim.anim);
@@ -40,31 +43,64 @@ public class BreathActivity extends AppCompatActivity {
                     currentValue = setValue - 1;
                 } else {
                     currentValue = -1;
+                    textB.setAlpha(0.0f);
                 }
                 if (currentValue == -1) {
                     imageCircle.clearAnimation();
+                    textB.clearAnimation();
                 } else {
-                    ScaleAnimation scale = new ScaleAnimation(1.0f, 4.0f, 1.0f, 4.0f,
+                    ScaleAnimation increase = new ScaleAnimation(1.0f, 4.0f, 1.0f, 4.0f,
                             Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                    ScaleAnimation scale1 = new ScaleAnimation(1.0f, 0.25f, 1.0f, 0.25f,
+                    ScaleAnimation decrease = new ScaleAnimation(1.0f, 0.25f, 1.0f, 0.25f,
                             Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                    scale.setRepeatCount(currentValue);
-                    scale.setDuration(4200);
-                    scale1.setRepeatCount(currentValue);
-                    scale1.setDuration(4200);
-                    AnimationSet set = new AnimationSet(false);
-                    set.addAnimation(scale);
-                    set.addAnimation(scale1);
-                    imageCircle.startAnimation(set);
+                    increase.setRepeatCount(currentValue);
+                    increase.setDuration(duration);
+                    decrease.setRepeatCount(currentValue);
+                    decrease.setDuration(duration);
+                    AnimationSet setImage = new AnimationSet(false);
+                    setImage.addAnimation(increase);
+                    setImage.addAnimation(decrease);
 
-                    long sleepingTime = setValue;
-                    Timer timer = new Timer();
-                    timer.schedule(new TimerTask() {
+                    textB.setAlpha(1.0f);
+                    AlphaAnimation appearance = new AlphaAnimation(0.0f, 2.0f);
+                    AlphaAnimation disappearance = new AlphaAnimation(2.0f, 0.0f);
+                    appearance.setRepeatCount(currentValue);
+                    appearance.setDuration(duration);
+                    disappearance.setRepeatCount(currentValue);
+                    disappearance.setDuration(duration);
+                    AnimationSet setText = new AnimationSet(false);
+                    setText.addAnimation(appearance);
+                    setText.addAnimation(disappearance);
+
+                    AlphaAnimation textAnimation = new AlphaAnimation(1.0f, 1.0f);
+                    textAnimation.setDuration(duration/2);
+                    textAnimation.setRepeatCount(currentValue * 2 + 1);
+                    setText.addAnimation(textAnimation);
+
+                    textAnimation.setAnimationListener(new Animation.AnimationListener() {
                         @Override
-                        public void run() {
-                            currentValue = -1;
+                        public void onAnimationStart(Animation animation) {
+                            textB.setText("Вдох");
                         }
-                    }, 4200L * sleepingTime);
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            currentValue = -1;
+                            textB.setAlpha(0.0f);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (textB.getText().toString().equals("Вдох")) {
+                                textB.setText("Выдох");
+                            } else {
+                                textB.setText("Вдох");
+                            }
+                        }
+                    });
+
+                    imageCircle.startAnimation(setImage);
+                    textB.startAnimation(setText);
                 }
             }
         });

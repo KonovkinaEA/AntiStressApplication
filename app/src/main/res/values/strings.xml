@@ -13,4 +13,6 @@
     <string name="text_3">text 4</string>
     <string name="text_4">text 5</string>
     <string name="text_5">text 6</string>
+    <string name="breath">Вдох</string>
+    <string name="exhalation">Выдох</string>
 </resources>
