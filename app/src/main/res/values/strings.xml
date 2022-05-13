@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AntiStress</string>
     <string name="your_health_is_the_most_important">Your health is the most important</string>
-    <string name="_0">0</string>
+    <string name="defaultNumberBreaths">10</string>
     <string name="text_0">
         Просто какой-то текст, надо проверить работу.
         \nНовый абзац.

@@ -2,7 +2,6 @@ package com.example.antistress;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,9 +31,10 @@ public class BreathActivity extends AppCompatActivity {
 
         imageCircle = findViewById(R.id.imageCircle);
         anim = AnimationUtils.loadAnimation(this, R.anim.anim);
-        imageCircle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        imageCircle.setOnClickListener(v -> {
+            if (repeatCount.getText().toString().isEmpty() || repeatCount.getText().toString().equals("Введите число!")) {
+                repeatCount.setText("Введите число!");
+            } else {
                 if (currentValue == -1) {
                     setValue = Integer.parseInt(repeatCount.getText().toString());
                     currentValue = setValue - 1;
@@ -59,7 +59,7 @@ public class BreathActivity extends AppCompatActivity {
 
                     long sleepingTime = setValue;
                     Timer timer = new Timer();
-                    timer.schedule(new TimerTask(){
+                    timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
                             currentValue = -1;
@@ -70,8 +70,7 @@ public class BreathActivity extends AppCompatActivity {
         });
     }
 
-    public void openMainActivity(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void closeBreathActivity(View v) {
+        finish();
     }
 }
