@@ -7,5 +7,6 @@
     android:gravity="center"
     android:background="@drawable/texts_element"
     android:fontFamily="@font/palatinolinotype_bolditalic"
+    android:textColor="@color/pink"
     android:textSize="25sp">
 </TextView>

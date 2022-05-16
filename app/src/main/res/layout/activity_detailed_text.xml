@@ -24,7 +24,7 @@
         android:layout_width="360dp"
         android:layout_height="470dp"
         android:background="@drawable/detailed_text_background"
-        android:padding="30dp"
+        android:padding="28dp"
         app:layout_constraintBottom_toTopOf="@+id/closeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,9 @@
                 android:id="@+id/detailedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/pink"
                 android:fontFamily="@font/palatinolinotype_italic"
-                android:textSize="20sp" />
+                android:textSize="27sp" />
         </LinearLayout>
     </ScrollView>
 
