@@ -19,9 +19,9 @@ public class BreathActivity extends AppCompatActivity {
     TextView textB;
     Animation anim;
     EditText repeatCount;
-    int setValue; // значение, набранное в строке задания повторов ()
+    int setValue; // значение, набранное в строке задания повторов (количество вдохов)
     int currentValue = -1; // текущее значение циклов
-    final int duration = 4400; // длительность периода анимации
+    final int duration = 5400; // длительность периода анимации (длительность вдоха)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
